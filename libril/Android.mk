@@ -1,6 +1,6 @@
 # Copyright 2006 The Android Open Source Project
 
-ifneq ($(BOARD_PROVIDES_LIBRIL),true)
+ifeq ($(BOARD_PROVIDES_LIBRIL),true)
 
 LOCAL_PATH:= $(call my-dir)
 include $(CLEAR_VARS)
@@ -21,6 +21,10 @@ LOCAL_SHARED_LIBRARIES := \
 
 ifeq ($(SIM_COUNT), 2)
     LOCAL_CFLAGS += -DANDROID_SIM_COUNT_2
+endif
+
+ifeq ($(BOARD_HAS_RIL_LEGACY_PAP),true)
+    LOCAL_CFLAGS += -DRIL_LEGACY_PAP
 endif
 
 LOCAL_MODULE:= libril
